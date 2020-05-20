@@ -1,7 +1,7 @@
 use farmadb;
 
 CREATE TABLE IF NOT EXISTS FAMILIA (
-	Fam_id		INT				NOT NULL, -- AUTO_INCREMENT
+	Fam_id		INT				NOT NULL,
 	Nom_fam		VARCHAR(100)	NOT NULL,
 	PRIMARY KEY (Fam_id)               
 );

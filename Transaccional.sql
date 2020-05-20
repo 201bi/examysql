@@ -1,0 +1,75 @@
+use farmadb;
+
+CREATE TABLE IF NOT EXISTS FAMILIA (
+	Fam_id		INT				NOT NULL, -- AUTO_INCREMENT
+	Nom_fam		VARCHAR(100)	NOT NULL,
+	PRIMARY KEY (Fam_id)               
+);
+CREATE TABLE IF NOT EXISTS CATEGORIA (
+	Cat_id		INT				NOT NULL,
+	Nom_cat		VARCHAR(100)	NOT NULL,
+	Fam_id		INT			NOT NULL,
+    FOREIGN KEY (Fam_id) REFERENCES FAMILIA (Fam_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (Cat_id)
+);
+CREATE TABLE IF NOT EXISTS PRODUCTO (
+	Prod_id		INT				NOT NULL,
+	Cod_prod		VARCHAR(100)	NOT NULL,
+    Nom_prod		VARCHAR(100)	NOT NULL,
+    Concent			VARCHAR(100)	 NULL,
+    Presentac		VARCHAR(100)	 NULL,
+    Fracciones		VARCHAR(100)	 NULL,
+    Prec_compra		DECIMAL(9,2)	 NULL,
+    Prec_venta		DECIMAL(9,2)	 NULL,
+	Cat_id		INT			NOT NULL,
+    FOREIGN KEY (Cat_id) REFERENCES CATEGORIA (Cat_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (Prod_id)
+);
+
+CREATE TABLE IF NOT EXISTS CLIENTE (
+	Cli_id		INT				NOT NULL,
+	Nom_cli		VARCHAR(100)	NOT NULL,
+	PRIMARY KEY (Cli_id)               
+);
+CREATE TABLE IF NOT EXISTS VENDEDOR (
+	Vend_id		INT				NOT NULL,
+	Nom_vend	VARCHAR(100)	NOT NULL,
+	PRIMARY KEY (Vend_id)               
+);
+
+CREATE TABLE IF NOT EXISTS PEDIDO (
+	Ped_id			INT			NOT NULL,
+	Fecha_crea		TIMESTAMP 	NOT NULL,
+    Fecha_confirm	TIMESTAMP  	 NULL, /*2020-03-08 08:09:00*/
+    Fecha_envio		TIMESTAMP 	 NULL,
+    Fecha_entrega	TIMESTAMP 	 NULL,
+    Fecha_pago		TIMESTAMP 	 NULL,
+    Estado			VARCHAR(20)	 NULL,
+	Cli_id			INT			 NOT NULL,
+    Direccion		VARCHAR(92)	 NULL,
+    Vend_id			INT			 NULL,
+    FOREIGN KEY (Cli_id) REFERENCES CLIENTE (Cli_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Vend_id) REFERENCES VENDEDOR (Vend_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (Ped_id)
+);
+
+CREATE TABLE IF NOT EXISTS PEDIDO_DET (
+	Ped_id			INT			NOT NULL,
+    Prod_id			INT			NOT NULL,
+	Cantidad		DECIMAL(9,2)	NOT NULL,
+    Prec_compra_un	DECIMAL(9,2) 	NULL,
+    Prec_venta_un	DECIMAL(9,2)	NOT NULL,
+    Total_desc_un	DECIMAL(9,2)	NULL,
+    Igv_un			DECIMAL(9,2)	NULL,
+    FOREIGN KEY (Ped_id) REFERENCES PEDIDO (Ped_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Prod_id) REFERENCES PRODUCTO (Prod_id) 
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (Ped_id, Prod_id)
+);
+
+

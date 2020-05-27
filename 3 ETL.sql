@@ -100,13 +100,13 @@ FROM (
 		,ped.Cantidad*(ped.Total_desc_un ) as Descuentos
         ,cli.Nom_cli
         ,v.Nom_vend
-	FROM farmadb.pedido as pe
-		inner join farmadb.pedido_det as ped on pe.Ped_id= ped.Ped_id 
-		inner join farmadb.producto as p on ped.Prod_id= p.Prod_id 
-		inner join farmadb.categoria as c on p.Cat_id= c.Cat_id 
-		inner join farmadb.familia as f on c.Fam_id= f.Fam_id 
-        inner join farmadb.cliente as cli on pe.Cli_id= cli.Cli_id 
-        inner join farmadb.vendedor as v on pe.Vend_id= v.Vend_id 
+	FROM farmadb.PEDIDO as pe
+		inner join farmadb.PEDIDO_DET as ped on pe.Ped_id= ped.Ped_id 
+		inner join farmadb.PRODUCTO as p on ped.Prod_id= p.Prod_id 
+		inner join farmadb.CATEGORIA as c on p.Cat_id= c.Cat_id 
+		inner join farmadb.FAMILIA as f on c.Fam_id= f.Fam_id 
+        inner join farmadb.CLIENTE as cli on pe.Cli_id= cli.Cli_id 
+        inner join farmadb.VENDEDOR as v on pe.Vend_id= v.Vend_id 
 	)  AS G
     
     inner join DPRODUCTO AS DP ON G.Cod_prod = DP.Cod_prod

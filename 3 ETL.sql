@@ -4,8 +4,8 @@ SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISIO
 
 -- SELECT @@lc_time_names;
 -- set @day_offset = 1; -- sunday SET DATEFIRST 1 ;  
-/*
-insert into DPRODUCTO (  --L
+
+insert into DPRODUCTO (  -- L
 	Cod_prod,
     Nom_prod,
     Prec_compra,
@@ -46,18 +46,18 @@ FROM farmadb.PEDIDO as pe WHERE pe.Fecha_confirm IS NOT NULL
        ORDER BY date_format(pe.Fecha_confirm, '%Y-%m-%d');
        
 
-insert into dcliente (
+insert into DCLIENTE (
 	Nom_cli
 )
-SELECT  c.Nom_cli FROM farmadb.cliente as c;
+SELECT  c.Nom_cli FROM farmadb.CLIENTE as c;
 
-insert into dvendedor (
+insert into DVENDEDOR (
 	Nom_vend
 )
-SELECT  v.Nom_vend FROM farmadb.vendedor as v;
+SELECT  v.Nom_vend FROM farmadb.VENDEDOR as v;
 
-*/
-insert into h_pedido (
+
+insert into H_PEDIDO (
 	DTiem_id,
     DProd_id,
     DCli_id,

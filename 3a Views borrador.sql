@@ -1,7 +1,7 @@
 use farma_dmart_ped;
 SET lc_time_names = 'es_ES';
 SET sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+/*
 CREATE TABLE IF NOT EXISTS H_PEDIDO (
     
     DProd_id			INT			NOT NULL,
@@ -29,10 +29,10 @@ insert into H_PEDIDO (
     
     Can_clientes
 )
-
+*/
 SELECT 
-DP.DProd_id,
-DT.DTiem_id,
+ DP.DProd_id,
+ DT.DTiem_id,
 sum(G.Cantidad) as CANT_UNID,
 sum(G.Ventas) as VENTAS,
 COUNT(DISTINCT G.Cli_id) AS Cant_clientes
@@ -49,6 +49,6 @@ COUNT(DISTINCT G.Cli_id) AS Cant_clientes
 			inner join farmadb.CATEGORIA as c on p.Cat_id= c.Cat_id 
 			inner join farmadb.FAMILIA as f on c.Fam_id= f.Fam_id  ) as G
             
-	inner join DPRODUCTO AS DP ON G.Cod_prod = DP.Cod_prod
-    inner join DTIEMPO AS DT ON G.Fecha = DT.Fecha
-    GROUP BY DProd_id, DT.DTiem_id
+	 inner join DPRODUCTO AS DP ON G.Cod_prod = DP.Cod_prod
+     inner join DTIEMPO AS DT ON G.Fecha = DT.Fecha
+    GROUP BY  DP.DProd_id, DT.DTiem_id
